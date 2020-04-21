@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>宠物列表</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            font-size: 14px;
+            width: 80%;
+            margin: auto
+        }
+
+        table, th, td {
+            border: 1px solid darkslategray;
+            padding: 10px
+        }
+    </style>
+    <script th:src="@{/js/axios.js}" type="text/javascript"></script>
+    <script th:src="@{/js/vue.js}" type="text/javascript"></script>
+    <script th:src="@{/js/jquery-3.3.1.js}" type="text/javascript"></script>
+</head>
+<body>
+<table border="1px" id="tab">
+    <tr>
+        <th>序列</th>
+        <th>id</th>
+        <th>name</th>
+        <th>kind</th>
+        <th>age</th>
+        <th>gender</th>
+        <th>操作</th>
+    </tr>
+    <tr v-for="(a, index) of animals">
+        <td>{{index+1}}</td>
+        <td>{{a.id}}</td>
+        <td>{{a.name}}</td>
+        <td>{{a.kind}}</td>
+        <td>{{a.age}}</td>
+        <td>{{a.gender}}</td>
+        <td><a :href="'/animal/toUpdatePage?id='+a.id">修改</a>
+            <input @click="delAnimal(index,a.id)" value="删除" type="button"></td>
+    </tr>
+</table>
+<a href="/toInsertAnimal">新增</a>
+</body>
+<script type="text/javascript">
+    var tab = new Vue({
+        el: "#tab",
+        data: {
+            animals: []
+        },
+        beforeMount: function () {
+            axios.get("/animal/list").then(function (result) {
+                tab.animals = result.data;
+            });
+        },
+        methods: {
+            delAnimal: function (index, id) {
+                axios.get("/animal/delete/" + id).then(function (data) {
+                    tab.$delete(tab.animals, index);
+                });
+            }
+        }
+    });
+</script>
+</html>
