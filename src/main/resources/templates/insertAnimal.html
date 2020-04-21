@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>新增宠物</title>
+</head>
+<body>
+<form action="/animal/saveOrUpdate" method="post">
+    <input type="hidden" name="type" value="insertAnimal">
+    name:<input type="text" name="name"/><br>
+    kind:<input type="text" name="kind"/><br>
+    age:<input type="text" name="age"/><br>
+    gender:<input type="radio" name="gender" value="female"/>雌
+    <input type="radio" name="gender" value="male"/>雄<br>
+    <input type="submit" value="新增"/>
+    <input type="reset" value="重置"/>
+</form>
+</body>
+</html>

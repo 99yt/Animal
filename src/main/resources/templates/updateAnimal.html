@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>修改宠物</title>
+</head>
+<body>
+
+<form action="/animal/saveOrUpdate" method="post">
+    id:<input type="text" name="id" th:value="${animal.id}" readonly/><br>
+    name:<input type="text" name="name" th:value="${animal.name}"/><br>
+    kind:<input type="text" name="kind" th:value="${animal.kind}"/><br>
+    age:<input type="text" name="age" th:value="${animal.age}"/><br>
+        gender:<input type="radio" name="gender" value="female" th:checked="${animal.gender}=='female'?'true':'false'"/>雌
+        <input type="radio" name="gender" value="male" th:checked="${animal.gender}=='male'?'true':'false'" />雄<br>
+
+    <input type="submit" value="修改"/>
+    <input type="reset" value="重置"/>
+</form>
+</body>
+</html>
